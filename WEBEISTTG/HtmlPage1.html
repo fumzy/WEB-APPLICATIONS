@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            var staffList = $('#stafflist');
+
+
+            $('#btnall').click(function () {
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://localhost:50797/api/staff',
+                    dataType: 'json',
+                    success: function (data) {
+
+
+
+                        staffList.empty();
+                        $.each(data, function (index, val) {
+                            var FullName = val.LastName + " " + val.FirstName;
+
+                            staffList.append('<li>' + FullName + '</li>');
+                        });
+
+                    }
+                });
+
+            });
+
+
+
+            $('#btnclear').click(function () {
+
+                staffList.empty();
+
+            });
+        });
+    </script>
+    <title></title>
+</head>
+<body>
+    <input type="button" id="btnall" value="All staff" class="btn btn-primary" />
+    <input type="button" id="btnclear" value="Clear" class="btn btn-default" />
+    <ul id="stafflist"></ul>
+
+</body>
+</html>
